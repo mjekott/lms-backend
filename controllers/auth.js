@@ -87,3 +87,14 @@ exports.logout = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.currentUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id).select("-password");
+    res.status(200).json({
+      sucess: true,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
